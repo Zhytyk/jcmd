@@ -10,11 +10,23 @@ public class UnixCmderPwdTest {
 
     @Test
     public void simplePwd() {
-        UnixCmder unixCmder = new UnixCmderPipeline();
+        UnixCmder unixCmder = UnixCmderPipeline.create();
         List<CmdResponse> responses = unixCmder.pwd().exec();
 
         Assert.assertEquals(1, responses.size());
-        Assert.assertEquals("/Users/pavel/IdeaProjects/jcmd", responses.get(0).getOutput());
+        Assert.assertEquals(unixCmder.directory(), responses.get(0).getOutput());
+    }
+
+    @Test
+    public void multiplePwds() {
+        UnixCmder unixCmder = UnixCmderPipeline.create();
+        List<CmdResponse> responses = unixCmder.pwd().pwd().pwd().exec();
+
+        Assert.assertEquals(3, responses.size());
+        responses.forEach(response ->
+            Assert.assertEquals(unixCmder.directory(), response.getOutput())
+        );
+
     }
 
 }

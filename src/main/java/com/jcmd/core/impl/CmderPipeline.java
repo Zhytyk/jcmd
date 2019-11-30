@@ -8,12 +8,19 @@ import com.jcmd.core.exception.CommandExecutionException;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.List;
 
 public abstract class CmderPipeline implements Cmder {
+    private ProcessBuilder processBuilder = new ProcessBuilder();
     private ResponseCreater responseCreater = ResponseCreater.getInstance();
     private List<Command> commands = Lists.newArrayList();
+
+    CmderPipeline(File file) {
+        processBuilder.directory(file);
+    }
 
     void addCommand(Command command) {
         this.commands.add(command);
@@ -28,8 +35,8 @@ public abstract class CmderPipeline implements Cmder {
                 output.add(
                         responseCreater.create(
                                 command,
-                                StringUtils.join((IOUtils.readLines(
-                                        new ProcessBuilder("/bin/bash", "-c", command.getCommand())
+                                String.join(StringUtils.EMPTY, (IOUtils.readLines(
+                                        processBuilder.command("/bin/bash", "-c", command.getCommand())
                                                 .start().getInputStream()
                                         ))
                                 )
@@ -43,4 +50,8 @@ public abstract class CmderPipeline implements Cmder {
         return output;
     }
 
+    @Override
+    public String directory() {
+        return processBuilder.directory().getAbsolutePath();
+    }
 }

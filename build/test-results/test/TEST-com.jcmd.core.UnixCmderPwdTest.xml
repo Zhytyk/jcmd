@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.jcmd.core.UnixCmderPwdTest" tests="1" skipped="1" failures="0" errors="0" timestamp="2019-11-30T16:35:59" hostname="MacBook-Air-Pavel.local" time="122.922">
+<testsuite name="com.jcmd.core.UnixCmderPwdTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2019-11-30T17:25:35" hostname="MacBook-Air-Pavel.local" time="0.061">
   <properties/>
-  <testcase name="simplePwd" classname="com.jcmd.core.UnixCmderPwdTest" time="122.922">
-    <skipped/>
-  </testcase>
+  <testcase name="simplePwd" classname="com.jcmd.core.UnixCmderPwdTest" time="0.038"/>
+  <testcase name="multiplePwds" classname="com.jcmd.core.UnixCmderPwdTest" time="0.023"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
