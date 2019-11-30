@@ -1,4 +1,4 @@
-package com.jcmd.core.exception;
+package com.jcmd.core.exceptions;
 
 public class CommandExecutionException extends RuntimeException {
 

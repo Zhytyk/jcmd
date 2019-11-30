@@ -1,13 +1,10 @@
 package com.jcmd.core.impl;
 
 import com.jcmd.core.UnixCmder;
-import com.jcmd.core.exception.CmderInitializationException;
+import com.jcmd.core.impl.cmds.Pwd;
 
 import java.io.File;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 
 public class UnixCmderPipeline extends CmderPipeline implements UnixCmder {
 

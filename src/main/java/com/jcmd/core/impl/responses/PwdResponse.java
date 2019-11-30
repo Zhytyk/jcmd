@@ -1,7 +1,8 @@
-package com.jcmd.core.impl;
+package com.jcmd.core.impl.responses;
 
 import com.jcmd.core.CmdResponse;
 import com.jcmd.core.Command;
+import com.jcmd.core.impl.cmds.Pwd;
 
 public class PwdResponse implements CmdResponse {
     private String output;
