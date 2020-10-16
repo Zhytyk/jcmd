@@ -12,6 +12,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 public abstract class CmderPipeline implements Cmder {
@@ -37,16 +38,7 @@ public abstract class CmderPipeline implements Cmder {
 
         try {
             for (Command command : commands) {
-                output.add(
-                        responseCreater.create(
-                                command,
-                                String.join(StringUtils.EMPTY, (IOUtils.readLines(
-                                        processBuilder.command("/bin/bash", "-c", command.getCommand())
-                                                .start().getInputStream()
-                                        ))
-                                )
-                        )
-                );
+                output.add(executeCommand(command));
             }
         } catch (IOException e) {
             throw new CommandExecutionException(e);
@@ -58,5 +50,20 @@ public abstract class CmderPipeline implements Cmder {
     @Override
     public String directory() {
         return processBuilder.directory().getAbsolutePath();
+    }
+
+    private CmdResponse executeCommand(Command command) throws IOException {
+        String output = execute(command);
+        return responseCreater.create(command, output);
+    }
+
+    private String execute(Command command) throws IOException {
+        return String.join(StringUtils.EMPTY,
+                IOUtils.readLines(executeWithProcessBuilder(command)));
+    }
+
+    private InputStream executeWithProcessBuilder(Command command) throws IOException {
+        return processBuilder.command("/bin/bash", "-c", command.getCommand())
+                .start().getInputStream();
     }
 }

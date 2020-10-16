@@ -1,6 +1,8 @@
 package com.jcmd.core.impl;
 
+import com.jcmd.core.Parameter;
 import com.jcmd.core.UnixCmder;
+import com.jcmd.core.impl.cmds.Cd;
 import com.jcmd.core.impl.cmds.Pwd;
 
 import java.io.File;
@@ -27,17 +29,18 @@ public class UnixCmderPipeline extends CmderPipeline implements UnixCmder {
     }
 
     @Override
-    public UnixCmder cd() {
+    public UnixCmder cd(Parameter parameter) {
+        addCommand(Cd.create(parameter));
         return this;
     }
 
     @Override
-    public UnixCmder ls(String... args) {
+    public UnixCmder ls(Parameter parameter) {
         return this;
     }
 
     @Override
-    public UnixCmder mkdir(String... args) {
+    public UnixCmder mkdir(Parameter parameter) {
         return this;
     }
 
