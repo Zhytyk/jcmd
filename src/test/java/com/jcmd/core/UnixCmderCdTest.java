@@ -19,4 +19,14 @@ public class UnixCmderCdTest {
         Assert.assertEquals(unixCmder.directory(), responses.get(1).getOutput());
     }
 
+    @Test
+    public void cdToHome() {
+        UnixCmder unixCmder = UnixCmderPipeline.create();
+        List<CmdResponse> responses =
+                unixCmder.cd(UnixParameter.create("~")).pwd().exec();
+
+        Assert.assertEquals(2, responses.size());
+        Assert.assertEquals(unixCmder.home(), responses.get(1).getOutput());
+    }
+
 }
