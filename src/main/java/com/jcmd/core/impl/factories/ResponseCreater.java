@@ -3,6 +3,8 @@ package com.jcmd.core.impl.factories;
 import com.jcmd.core.CmdResponse;
 import com.jcmd.core.Command;
 
+import java.util.List;
+
 public class ResponseCreater {
     private static ResponseCreater responseCreater = new ResponseCreater();
 

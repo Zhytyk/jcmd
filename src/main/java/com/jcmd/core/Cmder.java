@@ -6,4 +6,5 @@ public interface Cmder {
     List<CmdResponse> exec();
     String directory();
     String home();
+    Cmder compose();
 }

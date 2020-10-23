@@ -1,21 +1,21 @@
 package com.jcmd.core.impl;
 
 import com.google.common.collect.Lists;
-import com.jcmd.core.*;
+import com.jcmd.core.CmdResponse;
+import com.jcmd.core.Cmder;
+import com.jcmd.core.Command;
+import com.jcmd.core.Constants;
 import com.jcmd.core.exceptions.CommandExecutionException;
 import com.jcmd.core.exceptions.NoCommandToExecuteException;
-import com.jcmd.core.impl.cmds.Cd;
+import com.jcmd.core.impl.cmds.CompositeCommand;
 import com.jcmd.core.impl.factories.ResponseCreater;
-import com.jcmd.core.impl.responses.NoResponse;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Iterator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public abstract class CmderPipeline implements Cmder {
     private ProcessBuilder processBuilder = new ProcessBuilder();
@@ -32,15 +32,21 @@ public abstract class CmderPipeline implements Cmder {
 
     @Override
     public List<CmdResponse> exec() {
+        List<CmdResponse> output = Lists.newLinkedList();
+
         if (commands.isEmpty()) {
             throw new NoCommandToExecuteException();
         }
 
         try {
-            return executeCommand();
+            for (Command command : commands) {
+                output.add(executeCommand(command));
+            }
         } catch (IOException e) {
             throw new CommandExecutionException(e);
         }
+
+        return output;
     }
 
     @Override
@@ -53,35 +59,27 @@ public abstract class CmderPipeline implements Cmder {
         return System.getProperty("user.home");
     }
 
-    private List<CmdResponse> executeCommand() throws IOException {
-        Iterator<String> outputIterator = execute().iterator();
-        return commands.stream()
-                .map(c -> responseCreater.create(c,
-                        c instanceof NoResponseCommand
-                                ? StringUtils.EMPTY : outputIterator.next()))
-                .collect(Collectors.toList());
+    @Override
+    public Cmder compose() {
+        CompositeCommand compositeCmd =
+                CompositeCommand.create(Lists.newArrayList(this.commands));
+        this.commands.clear();
+        addCommand(compositeCmd);
+        return this;
     }
 
-    private List<String> execute() throws IOException {
-        return IOUtils.readLines(executeWithProcessBuilder());
+    private CmdResponse executeCommand(Command command) throws IOException {
+        String output = execute(command);
+        return responseCreater.create(command, output);
     }
 
-    private InputStream executeWithProcessBuilder() throws IOException {
-        List<String> commandList = Lists.newLinkedList();
-        commandList.add("/bin/bash");
-        commandList.add("-c");
+    private String execute(Command command) throws IOException {
+        return String.join(Constants.NL,
+                IOUtils.readLines(executeWithProcessBuilder(command)));
+    }
 
-        StringBuilder commandStr = new StringBuilder();
-        for (Command command : commands) {
-            commandStr.append(command.getCommand())
-                    .append(Constants.SPACE)
-                    .append(Constants.SEMICOLON)
-                    .append(Constants.SPACE);
-        }
-
-        commandList.add(commandStr.toString());
-
-        return processBuilder.command(commandList)
+    private InputStream executeWithProcessBuilder(Command command) throws IOException {
+        return processBuilder.command("/bin/bash", "-c", command.getCommand())
                 .start().getInputStream();
     }
 }

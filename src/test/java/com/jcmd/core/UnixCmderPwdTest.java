@@ -26,7 +26,6 @@ public class UnixCmderPwdTest {
         responses.forEach(response ->
             Assert.assertEquals(unixCmder.directory(), response.getOutput())
         );
-
     }
 
 }

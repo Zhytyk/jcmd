@@ -17,7 +17,7 @@ public class UnixParameter implements Parameter {
                 Lists.newArrayList(parameter));
     }
 
-    private UnixParameter(List<String> options, List<String> arguments) {
+    protected UnixParameter(List<String> options, List<String> arguments) {
         this.options = options;
         this.arguments = arguments;
     }
