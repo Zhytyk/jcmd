@@ -8,7 +8,7 @@ import com.jcmd.core.impl.args.EmptyUnixParameter;
 import com.jcmd.core.impl.responses.LsResponse;
 
 public class Ls implements Command {
-    public static final String LS = "ls";
+    private static final String LS = "ls";
 
     private Parameter parameter;
 

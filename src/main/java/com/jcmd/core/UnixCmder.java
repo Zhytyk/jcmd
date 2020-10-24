@@ -6,6 +6,7 @@ public interface UnixCmder extends Cmder {
     UnixCmder ls();
     UnixCmder ls(Parameter parameter);
     UnixCmder mkdir(Parameter parameter);
-    UnixCmder rmdir();
-    UnixCmder touch();
+    UnixCmder rmdir(Parameter parameter);
+    UnixCmder touch(Parameter parameter);
+    UnixCmder rm(Parameter parameter);
 }

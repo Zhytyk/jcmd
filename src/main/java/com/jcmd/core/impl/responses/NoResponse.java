@@ -12,4 +12,8 @@ public class NoResponse extends AbstractResponse {
         super(output, cmd);
     }
 
+    @Override
+    public String getOutput() {
+        throw new UnsupportedOperationException("output is not supported in NoResponse");
+    }
 }
