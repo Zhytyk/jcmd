@@ -9,4 +9,5 @@ public interface UnixCmder extends Cmder {
     UnixCmder rmdir(Parameter parameter);
     UnixCmder touch(Parameter parameter);
     UnixCmder rm(Parameter parameter);
+    UnixCmder sleep(Parameter parameter);
 }

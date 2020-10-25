@@ -68,4 +68,10 @@ public class UnixCmderPipeline extends CmderPipeline implements UnixCmder {
         addCommand(Rm.create(parameter));
         return this;
     }
+
+    @Override
+    public UnixCmder sleep(Parameter parameter) {
+        addCommand(Sleep.create(parameter));
+        return this;
+    }
 }
