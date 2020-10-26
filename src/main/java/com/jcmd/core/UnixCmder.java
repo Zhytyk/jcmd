@@ -10,4 +10,6 @@ public interface UnixCmder extends Cmder {
     UnixCmder touch(Parameter parameter);
     UnixCmder rm(Parameter parameter);
     UnixCmder sleep(Parameter parameter);
+    UnixCmder docker();
+    UnixCmder docker(Parameter... parameters);
 }

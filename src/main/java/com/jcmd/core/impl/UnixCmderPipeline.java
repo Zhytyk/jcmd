@@ -74,4 +74,16 @@ public class UnixCmderPipeline extends CmderPipeline implements UnixCmder {
         addCommand(Sleep.create(parameter));
         return this;
     }
+
+    @Override
+    public UnixCmder docker() {
+        addCommand(Docker.create());
+        return this;
+    }
+
+    @Override
+    public UnixCmder docker(Parameter... parameters) {
+        addCommand(Docker.create(parameters));
+        return this;
+    }
 }

@@ -12,9 +12,20 @@ public class UnixParameter implements Parameter {
     private List<String> options;
     private List<String> arguments;
 
-    public static Parameter create(String parameter) {
+    public static Parameter create(String... parameters) {
         return new UnixParameter(Collections.emptyList(),
-                Lists.newArrayList(parameter));
+                Lists.newArrayList(parameters));
+    }
+
+    public static Parameter createOpts(String... options) {
+        return new UnixParameter(Lists.newArrayList(options),
+                Collections.emptyList());
+    }
+
+    public static Parameter createParamsAndOpts(List<String> params,
+                                                List<String> options) {
+        return new UnixParameter(Lists.newArrayList(options),
+                Lists.newArrayList(params));
     }
 
     protected UnixParameter(List<String> options, List<String> arguments) {
