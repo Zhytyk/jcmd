@@ -32,15 +32,4 @@ public class UnixCmderRunFileTest {
         Assert.assertEquals(1, responses.size());
         System.out.println(responses.get(0).getOutput());
     }
-
-    @Test
-    public void runGradlew() {
-        UnixCmder unixCmder = UnixCmderPipeline.create();
-        List<CmdResponse> responses =
-                unixCmder.runFile("/Users/pavel/IdeaProjects/jcmd/gradlew")
-                        .exec();
-
-        Assert.assertEquals(1, responses.size());
-        System.out.println(responses.get(0).getOutput());
-    }
 }
