@@ -2,7 +2,7 @@ package com.jcmd.core.impl.cmds;
 
 import com.google.common.collect.Lists;
 import com.jcmd.core.CmdResponse;
-import com.jcmd.core.Command;
+import com.jcmd.core.Executable;
 import com.jcmd.core.Constants;
 import com.jcmd.core.Parameter;
 import com.jcmd.core.impl.args.EmptyUnixParameter;
@@ -10,7 +10,7 @@ import com.jcmd.core.impl.responses.DockerResponse;
 
 import java.util.List;
 
-public class Docker implements Command {
+public class Docker implements Executable {
     private static final String DOCKER = "docker";
 
     private List<Parameter> parameters;
@@ -29,7 +29,7 @@ public class Docker implements Command {
     }
 
     @Override
-    public String getCommand() {
+    public String getExecutable() {
         StringBuilder command = new StringBuilder(DOCKER);
 
         for (Parameter parameter : parameters) {

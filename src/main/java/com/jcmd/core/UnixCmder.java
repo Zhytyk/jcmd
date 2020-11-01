@@ -12,4 +12,7 @@ public interface UnixCmder extends Cmder {
     UnixCmder sleep(Parameter parameter);
     UnixCmder docker();
     UnixCmder docker(Parameter... parameters);
+    UnixCmder run(String executable);
+    UnixCmder runFile(String path);
+    UnixCmder runFile(String path, Parameter parameter);
 }

@@ -1,12 +1,12 @@
 package com.jcmd.core.impl.cmds;
 
 import com.jcmd.core.CmdResponse;
-import com.jcmd.core.Command;
+import com.jcmd.core.Executable;
 import com.jcmd.core.Constants;
 import com.jcmd.core.Parameter;
 import com.jcmd.core.impl.responses.NoResponse;
 
-public class Rm implements Command {
+public class Rm implements Executable {
     private static final String RM = "rm";
 
     private Parameter parameter;
@@ -20,7 +20,7 @@ public class Rm implements Command {
     }
 
     @Override
-    public String getCommand() {
+    public String getExecutable() {
         return RM + Constants.SPACE + parameter.convertToString();
     }
 

@@ -1,10 +1,10 @@
 package com.jcmd.core.impl.cmds;
 
 import com.jcmd.core.CmdResponse;
-import com.jcmd.core.Command;
+import com.jcmd.core.Executable;
 import com.jcmd.core.impl.responses.PwdResponse;
 
-public class Pwd implements Command {
+public class Pwd implements Executable {
     private static final String PWD = "pwd";
 
     public static Pwd create() {
@@ -16,7 +16,7 @@ public class Pwd implements Command {
     }
 
     @Override
-    public String getCommand() {
+    public String getExecutable() {
         return PWD;
     }
 

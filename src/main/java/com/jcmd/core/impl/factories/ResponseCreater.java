@@ -1,9 +1,7 @@
 package com.jcmd.core.impl.factories;
 
 import com.jcmd.core.CmdResponse;
-import com.jcmd.core.Command;
-
-import java.util.List;
+import com.jcmd.core.Executable;
 
 public class ResponseCreater {
     private static ResponseCreater responseCreater = new ResponseCreater();
@@ -12,7 +10,7 @@ public class ResponseCreater {
         return responseCreater;
     }
 
-    public CmdResponse create(Command command, String output) {
-        return command.createResponse(output);
+    public CmdResponse create(Executable executable, String output) {
+        return executable.createResponse(output);
     }
 }

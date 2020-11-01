@@ -1,13 +1,12 @@
 package com.jcmd.core.impl.cmds;
 
 import com.jcmd.core.CmdResponse;
-import com.jcmd.core.Command;
+import com.jcmd.core.Executable;
 import com.jcmd.core.Constants;
 import com.jcmd.core.Parameter;
-import com.jcmd.core.impl.args.EmptyUnixParameter;
 import com.jcmd.core.impl.responses.NoResponse;
 
-public class Mkdir implements Command {
+public class Mkdir implements Executable {
     private static final String MK_DIR = "mkdir";
 
     private Parameter parameter;
@@ -21,7 +20,7 @@ public class Mkdir implements Command {
     }
 
     @Override
-    public String getCommand() {
+    public String getExecutable() {
         return MK_DIR + Constants.SPACE + parameter.convertToString();
     }
 

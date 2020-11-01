@@ -1,13 +1,13 @@
 package com.jcmd.core.impl.cmds;
 
 import com.jcmd.core.CmdResponse;
-import com.jcmd.core.Command;
+import com.jcmd.core.Executable;
 import com.jcmd.core.Constants;
 import com.jcmd.core.Parameter;
 import com.jcmd.core.impl.args.EmptyUnixParameter;
 import com.jcmd.core.impl.responses.LsResponse;
 
-public class Ls implements Command {
+public class Ls implements Executable {
     private static final String LS = "ls";
 
     private Parameter parameter;
@@ -26,7 +26,7 @@ public class Ls implements Command {
     }
 
     @Override
-    public String getCommand() {
+    public String getExecutable() {
         return LS + Constants.SPACE + parameter.convertToString();
     }
 
