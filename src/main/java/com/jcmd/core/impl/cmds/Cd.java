@@ -3,7 +3,7 @@ package com.jcmd.core.impl.cmds;
 import com.jcmd.core.*;
 import com.jcmd.core.impl.responses.NoResponse;
 
-public class Cd implements Command, NoResponseCommand {
+public class Cd implements Executable, NoResponseCommand {
     private static final String CD = "cd";
 
     private Parameter parameter;
@@ -17,7 +17,7 @@ public class Cd implements Command, NoResponseCommand {
     }
 
     @Override
-    public String getCommand() {
+    public String getExecutable() {
         return CD + Constants.SPACE + parameter.convertToString();
     }
 

@@ -1,14 +1,14 @@
 package com.jcmd.core.impl.responses;
 
-import com.jcmd.core.Command;
+import com.jcmd.core.Executable;
 
 public class NoResponse extends AbstractResponse {
 
-    public static NoResponse create(Command cmd, String output) {
+    public static NoResponse create(Executable cmd, String output) {
         return new NoResponse(cmd, output);
     }
 
-    private NoResponse(Command cmd, String output) {
+    private NoResponse(Executable cmd, String output) {
         super(output, cmd);
     }
 

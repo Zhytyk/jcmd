@@ -3,7 +3,7 @@ package com.jcmd.core.impl.cmds;
 import com.jcmd.core.*;
 import com.jcmd.core.impl.responses.NoResponse;
 
-public class Sleep implements Command, NoResponseCommand {
+public class Sleep implements Executable, NoResponseCommand {
     private static final String SLEEP = "sleep";
 
     private Parameter parameter;
@@ -17,7 +17,7 @@ public class Sleep implements Command, NoResponseCommand {
     }
 
     @Override
-    public String getCommand() {
+    public String getExecutable() {
         return SLEEP + Constants.SPACE + parameter.convertToString();
     }
 

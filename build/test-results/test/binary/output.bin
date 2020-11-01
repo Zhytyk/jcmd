@@ -1,0 +1,18 @@
+VStarting a Gradle Daemon, 1 busy Daemon could not be reused, use --status for details
+
+> Task :help
+
+Welcome to Gradle 5.2.1.
+
+'To run a build, run gradlew <task> ...
+
+4To see a list of available tasks, run gradlew tasks
+
+:To see a list of command-line options, run gradlew --help
+
+@To see more detail about a task, run gradlew help --task <task>
+
+3For troubleshooting, visit https://help.gradle.org
+
+BUILD SUCCESSFUL in 5s
+1 actionable task: 1 executed

@@ -3,6 +3,8 @@ package com.jcmd.core.impl;
 import com.jcmd.core.Parameter;
 import com.jcmd.core.UnixCmder;
 import com.jcmd.core.impl.cmds.*;
+import com.jcmd.core.impl.cmds.utils.FileExecutable;
+import com.jcmd.core.impl.cmds.utils.StringExecutable;
 
 import java.io.File;
 import java.nio.file.Path;
@@ -84,6 +86,24 @@ public class UnixCmderPipeline extends CmderPipeline implements UnixCmder {
     @Override
     public UnixCmder docker(Parameter... parameters) {
         addCommand(Docker.create(parameters));
+        return this;
+    }
+
+    @Override
+    public UnixCmder run(String executable) {
+        addCommand(StringExecutable.create(executable));
+        return this;
+    }
+
+    @Override
+    public UnixCmder runFile(String path) {
+        addCommand(FileExecutable.create(path));
+        return this;
+    }
+
+    @Override
+    public UnixCmder runFile(String path, Parameter parameter) {
+        addCommand(FileExecutable.create(path, parameter));
         return this;
     }
 }

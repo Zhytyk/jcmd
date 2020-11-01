@@ -1,20 +1,20 @@
 package com.jcmd.core.impl.responses;
 
 import com.jcmd.core.CmdResponse;
-import com.jcmd.core.Command;
+import com.jcmd.core.Executable;
 
 public abstract class AbstractResponse implements CmdResponse {
     private String output;
-    private Command command;
+    private Executable executable;
 
-    public AbstractResponse(String output, Command command) {
+    public AbstractResponse(String output, Executable executable) {
         this.output = output;
-        this.command = command;
+        this.executable = executable;
     }
 
     @Override
-    public Command getCommand() {
-        return command;
+    public Executable getExecutable() {
+        return executable;
     }
 
     @Override
